@@ -234,11 +234,12 @@ void loop()
     
   }
 
+
   /****************************
-  ******* SENSOR 03 ********
+  *******   SENSOR 03 ********
   ****************************/
 
-  //LER O VALOR DO PINO A2 DO SENSOR
+  //LER O VALOR DO PINO A3 DO SENSOR
   c = analogRead(pino_sinal_analogico3);
   valor_analogico3 = (1023 - c); 
 
@@ -248,7 +249,8 @@ void loop()
   //SOLO SECO
   if (valor_analogico3 > 0 && valor_analogico3 < 400)
   {
-    //STATUS: SOLO SECO
+    delay(1000);
+    //STATUS: SOLO SECO - IRRIGANDO POR 2 MINUTOS(120 SEGUNDOS)
 
     //GRAVAR DADOS NO ARQUIVO "dados.txt" 
     //INICIALIZA O MÓDULO SD
@@ -258,7 +260,7 @@ void loop()
     //ABERTURA DO ARQUIVO "dados.txt"
     if (!meuArquivo.open("dados.txt", O_RDWR | O_CREAT | O_AT_END))
     {
-      sdCard.errorHalt("Erro na abertura do arquivo!");
+      sdCard.errorHalt( "Erro na abertura do arquivo!");
     }
       
     //GRAVAR DADOS NO CARTÃO SD
@@ -266,13 +268,15 @@ void loop()
     meuArquivo.print("3,120,-999,-999,-999,-999,");meuArquivo.println(valor_analogico3);
     //FECHANDO ARQUIVO
     meuArquivo.close();
-   
+    
   }
  
-  //SOLO COM UMIDADE MODERADA
+  //SOLO COM UMIDADE MODERADA 
   else if (valor_analogico3 >= 400 && valor_analogico3 < 800)
   {
-    //STATUS: SOLO MODERADO - 
+    delay(1000);
+    //STATUS: SOLO MODERADO - IRRIGANDO POR 1 MINUTO(60 SEGUNDOS)
+
     //GRAVAR DADOS NO ARQUIVO "dados.txt" 
     //INICIALIZA O MÓDULO SD
     if(!sdCard.begin(chipSelect,SPI_HALF_SPEED)){
@@ -280,7 +284,7 @@ void loop()
     }
     //ABERTURA DO ARQUIVO "dados.txt"
     if (!meuArquivo.open("dados.txt", O_RDWR | O_CREAT | O_AT_END))
-    {
+     {
       sdCard.errorHalt("Erro na abertura do arquivo!");
     }
       
@@ -293,9 +297,10 @@ void loop()
   }
  
   //SOLO UMIDO
-  //(valor_analogico2 > 800 && valor_analogico2 < 1024)
+  //(valor_analogico3 > 800 && valor_analogico3 < 1024)
   else 
   {
+    delay(1000);
     //STATUS: SOLO SECO - SEM IRRIGAÇÃO  
     //GRAVAR DADOS NO ARQUIVO "dados.txt" 
     //INICIALIZA O MÓDULO SD
@@ -316,8 +321,9 @@ void loop()
     
   }
 
+
   /****************************
-  ******* SENSOR 04 ********
+  *******   SENSOR 04 ********
   ****************************/
 
   //LER O VALOR DO PINO A3 DO SENSOR
@@ -330,7 +336,8 @@ void loop()
   //SOLO SECO
   if (valor_analogico4 > 0 && valor_analogico4 < 400)
   {
-    //STATUS: SOLO SECO
+    delay(1000);
+    //STATUS: SOLO SECO - IRRIGANDO POR 2 MINUTOS(120 SEGUNDOS)
 
     //GRAVAR DADOS NO ARQUIVO "dados.txt" 
     //INICIALIZA O MÓDULO SD
@@ -340,7 +347,7 @@ void loop()
     //ABERTURA DO ARQUIVO "dados.txt"
     if (!meuArquivo.open("dados.txt", O_RDWR | O_CREAT | O_AT_END))
     {
-      sdCard.errorHalt("Erro na abertura do arquivo!");
+      sdCard.errorHalt( "Erro na abertura do arquivo!");
     }
       
     //GRAVAR DADOS NO CARTÃO SD
@@ -348,13 +355,15 @@ void loop()
     meuArquivo.print("4,120,-999,-999,-999,-999,");meuArquivo.println(valor_analogico4);
     //FECHANDO ARQUIVO
     meuArquivo.close();
-   
+ 
   }
  
-  //SOLO COM UMIDADE MODERADA
+  //SOLO COM UMIDADE MODERADA 
   else if (valor_analogico4 >= 400 && valor_analogico4 < 800)
   {
-    //STATUS: SOLO MODERADO - 
+    delay(1000);
+    //STATUS: SOLO MODERADO - IRRIGANDO POR 1 MINUTO(60 SEGUNDOS)
+
     //GRAVAR DADOS NO ARQUIVO "dados.txt" 
     //INICIALIZA O MÓDULO SD
     if(!sdCard.begin(chipSelect,SPI_HALF_SPEED)){
@@ -362,7 +371,7 @@ void loop()
     }
     //ABERTURA DO ARQUIVO "dados.txt"
     if (!meuArquivo.open("dados.txt", O_RDWR | O_CREAT | O_AT_END))
-    {
+     {
       sdCard.errorHalt("Erro na abertura do arquivo!");
     }
       
@@ -378,6 +387,7 @@ void loop()
   //(valor_analogico4 > 800 && valor_analogico4 < 1024)
   else 
   {
+    delay(1000);
     //STATUS: SOLO SECO - SEM IRRIGAÇÃO  
     //GRAVAR DADOS NO ARQUIVO "dados.txt" 
     //INICIALIZA O MÓDULO SD
@@ -397,6 +407,7 @@ void loop()
     meuArquivo.close();
     
   }
+
 
   
   //PARANDO O SISTEMA POR 60 MINUTOS(1 HORA)
